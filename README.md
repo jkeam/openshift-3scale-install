@@ -1,2 +1,3 @@
-# openshift-3scale-install
-OpenShift 3scale installation
+# OpenShift 3scale Install
+
+OpenShift 3scale installation script and notes.

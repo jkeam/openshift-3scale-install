@@ -1,0 +1,59 @@
+apiVersion: template.openshift.io/v1
+kind: Template
+metadata:
+  name: 3scale-installation-template
+  annotations:
+    description: "Install 3scale"
+    iconClass: "icon-3scale"
+    tags: "3scale,api"
+objects:
+- apiVersion: v1
+  kind: Namespace
+  metadata:
+    name: 3scale-project
+    labels:
+      name: 3scale-project
+- apiVersion: v1
+  kind: Secret
+  type: Opaque
+  metadata:
+    name: aws-auth
+    namespace: 3scale-project
+  stringData:
+    AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+    AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+    AWS_BUCKET: ${AWS_BUCKET}
+    AWS_REGION: ${AWS_REGION}
+- apiVersion: apps.3scale.net/v1alpha1
+  kind: APIManager
+  metadata:
+    name: apimanager
+    namespace: 3scale-project
+  spec:
+    wildcardDomain: ${OCP_APPS_DOMAIN}
+    system:
+      fileStorage:
+        simpleStorageService:
+          configurationSecretRef:
+            name: aws-auth
+parameters:
+- name: AWS_ACCESS_KEY_ID
+  displayName: AWS Access Key ID
+  description: AWS Access Key used for authentication with AWS to use the S3 bucket
+  required: true
+- name: AWS_SECRET_ACCESS_KEY
+  displayName: AWS Secret Key
+  description: AWS Secret Key used for authentication with AWS to use the S3 bucket
+  required: true
+- name: AWS_BUCKET
+  displayName: AWS Bucket
+  description: AWS Bucket used to store 3scale data
+  required: true
+- name: AWS_REGION
+  displayName: AWS Region
+  description: AWS Region where the AWS Bucket is located
+  required: true
+- name: OCP_APPS_DOMAIN
+  displayName: OpenShift Apps Domain
+  description: "The OpenShift *.apps domain"
+  required: true
