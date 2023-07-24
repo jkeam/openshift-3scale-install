@@ -20,3 +20,21 @@ OpenShift 3scale installation script and notes.
     -p OCP_APPS_DOMAIN=apps.cluster.foo.bar.example.com \
     | oc create -f -
     ````
+
+## Post Installation
+
+1. 3scale will be running at `https://3scale-admin.apps.{cluster_name}`
+
+2. Admin
+
+    ```shell
+    oc get secret system-seed -o json | jq -r .data.ADMIN_USER | base64 -d
+    oc get secret system-seed -o json | jq -r .data.ADMIN_PASSWORD | base64 -d
+    ```
+
+3. Master Admin
+
+    ```shell
+    oc get secret system-seed -o json | jq -r .data.MASTER_USER | base64 -d
+    oc get secret system-seed -o json | jq -r .data.MASTER_PASSWORD | base64 -d
+    ```
