@@ -41,9 +41,10 @@ Plans dicate the usage of the API.
     3. Set default plan -> basic
 7. Bob wants access
     1. Can create CMS for developer to sign up with or without approval
-        - Can create in the portal here
-        - We're going to do now for this demo
+        - Can create in the portal here (Audience, Developer Portal -- for Echo API)
+        - Click Visit Portal
     2. Dropdown -> Audience
+        - We're going to do now for this demo
 8. Application - Like when you request access to Twitter or Facebook,
 you create an application and describe the purpose of your app;
 why you need access to the API.
@@ -68,9 +69,10 @@ why you need access to the API.
     1. Hit /jon, demonstrate nothing
     2. Show -vvv to see headers
     3. See Error config - Integration -> Settings to see error configuration
-    4. Policies -> URL Rewriting
+    4. Policies -> URL Rewriting -> COMMANDS
         - GET
         - /jon
         - First substitution
         - /fact
     5. Reorder to get the rewriting to be done first
+    6. Integration -> Configuration -> Promote
